@@ -1,3 +1,4 @@
+const alumnos=[];
 function chequearEmail(email)
 {
     //creo la variable emailValidation que devuelve true si el email es correcto o false si encontro un error.
@@ -52,6 +53,29 @@ function chequearIdiomas(idiomas)
     }
     return idiomasValidado;
 }
+function chequearCantAlumnos(cant)
+{
+    let cantValidada=false;
+    //lo convierto a numero la cantidad, sacando sus decimales en caso que contenga
+    cantAlumnos= Number(cant)
+    //si es un numero, y es un entero, estamos bien
+    if ((isNaN(cantAlumnos)===false) && (Number.isInteger(cantAlumnos)===true))
+    {
+        //valido que la cant ingresada sea mayor a 1. 
+        if (cantAlumnos>1===true){
+            //pongo la variable en true.
+            cantValidada=true;
+        }
+    }
+    return cantValidada;
+}
+
+function agregarAlumno(alumnos,alumno)
+{
+    alumnos.push(alumno);
+    alert("usuario agregado exitosamente!")
+}
+
 //creo clase constructora con el Alumno, que reciba nombre edad , email y idiomas como parametro
 class Alumno {
     //la clase alumno va a tener un nombre y apellido, edad, email y los idiomas que sabe
@@ -74,48 +98,73 @@ class Alumno {
 //repito hasta que la variable sea en true, es decir que los datos fueron bien ingresados!
 
 
-let nombre= prompt("Ingrese su nombre y Apellido")
+//ingreso la cantidad de alumnos a ingresar por el usuario para ir agregandolos a la lista
+let cantAlumnos=parseInt(prompt("ingrese la cantidad de alumnos a crear:"));
+let cantAlumnosValidada=chequearCantAlumnos(cantAlumnos);
 
-//arrow function para validar el nombre no sea numero si es numbero devuelve true la funcion entonces seguimos, sino pedimos hasta que no sea un numero el nombre ingresado
-const chequearNombreArrow = (nombre) => isNaN(nombre) ?  true : false;
-
-while (chequearNombreArrow(nombre)===false){
-    alert("no ingrese numeros en el nombre")
-    nombre= prompt("Ingrese su nombre y apellido")
-    nombreValidationState=chequearNombreArrow(nombre)
-}
-
-
-let edad=prompt("Ingrese su edad");
-let edadValidationState=chequearEdad(edad);
-
-while (edadValidationState==false)
+//valido que la cantidad ingresada sea real, luego itero con for hasta que llegue a la cantidad
+while (cantAlumnosValidada==false)
 {
     alert("debe ingresar un numero entero");
-    edad=prompt("Ingrese su edad");
-    edadValidationState=chequearEdad(edad);
-    alert(edadValidationState)
+    cantAlumnos=parseInt(prompt("ingrese la cantidad de alumnos a crear:"));
+    cantAlumnosValidada=chequearCantAlumnos(cantAlumnos);    
 }
 
-let email=prompt("Ingrese el correo")
-let emailValidadoState=chequearEmail(email)
-while (emailValidadoState==false){
-    alert("Datos de correo incorrectos, ingreselos nuevamente, recuerde que debe contener @ y .com!")
-    email=prompt("Ingrese el correo")
-    emailValidadoState=chequearEmail(email)
-}
-
-let idiomas=prompt("Ingrese los idiomas")
-let idiomasValidadoState=chequearIdiomas(idiomas)
-while (idiomasValidadoState==false)
+for (let i = 0;i<cantAlumnos;i++)
 {
-    alert("no ingrese numeros los idiomas, sino que ingrese cuales sabe!")
-    idiomas= prompt("Ingrese los idiomas")
-    idiomasValidadoState=chequearIdiomas(idiomas)
+    let nombre=prompt("Ingrese su nombre y Apellido")
+    //arrow function para validar el nombre no sea numero si es numbero devuelve true la funcion entonces seguimos, sino pedimos hasta que no sea un numero el nombre ingresado
+    const chequearNombreArrow = (nombre) => isNaN(nombre) ?  true : false;
+
+    while (chequearNombreArrow(nombre)===false){
+        alert("no ingrese numeros en el nombre")
+        nombre= prompt("Ingrese su nombre y apellido")
+        nombreValidationState=chequearNombreArrow(nombre)
+    }
+
+
+    let edad=prompt("Ingrese su edad");
+    let edadValidationState=chequearEdad(edad);
+
+    while (edadValidationState==false)
+    {
+        alert("debe ingresar un numero entero");
+        edad=prompt("Ingrese su edad");
+        edadValidationState=chequearEdad(edad);
+        alert(edadValidationState)
+    }
+
+    let email=prompt("Ingrese el correo")
+    let emailValidadoState=chequearEmail(email)
+    while (emailValidadoState==false){
+        alert("Datos de correo incorrectos, ingreselos nuevamente, recuerde que debe contener @ y .com!")
+        email=prompt("Ingrese el correo")
+        emailValidadoState=chequearEmail(email)
+    }
+
+    let idiomas=prompt("Ingrese los idiomas")
+    let idiomasValidadoState=chequearIdiomas(idiomas)
+    while (idiomasValidadoState==false)
+    {
+        alert("no ingrese numeros los idiomas, sino que ingrese cuales sabe!")
+        idiomas= prompt("Ingrese los idiomas")
+        idiomasValidadoState=chequearIdiomas(idiomas)
+    }
+    //
+    alert(`todos los datos de ${nombre} fueron cargados correctamente`)
+    const alumnoCreado = new Alumno(nombre,edad,email,idiomas);
+    alumnoCreado.presentacion();
+    agregarAlumno(alumnos,alumnoCreado);
 }
 
-//
-alert("todos los datos fueron cargados correctamente!")
-const alumno1 = new Alumno(nombre,edad,email,idiomas);
-console.log(alumno1)
-alumno1.presentacion()
+//muestro todos los alumnos:
+console.log(alumnos);
+
+//a continuacion vamos a filtrar alumnos por la edad, mayores de 18 a mayores y menos de 18 a menores.
+let mayores=alumnos.filter(item =>item.age >= 18);
+console.log(mayores)
+
+let menores=alumnos.filter(item =>item.age <18);
+console.log(menores)
+
+

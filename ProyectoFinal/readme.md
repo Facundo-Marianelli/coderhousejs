@@ -15,7 +15,15 @@ para esta primer entrega, se realizo una clase Alumno, donde se se le asignaron 
 estos atributos son validados sintaticamente a traves de las funciones "Chequear", una vez validado sintaticamente voy a la clase constructor donde inicializo la clase Alumno con los respectivos atributos.
 chequearNombreArrow --> funcion flecha que valida el nombre sintaticamente.
 
+funcionAgregarAlumno--> agrega el alumno a la lista creada de Alumnos.
+
+Se incorpora el filter, para filtrar datos segun un parametro indicado, en este caso se filtro por mayores y menores, aquellos donde el age del objeto Alumno sea mayor a 18 para mayores y menores a 18 para los menores.
+
+
+
 Metodo Presentacion donde presento los datos cargados.
+
+
 
 #Autor
 Facundo Andrés Marianelli Keichian

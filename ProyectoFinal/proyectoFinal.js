@@ -1,4 +1,22 @@
+//===========Clases constructoras===========
+
+//creo clase constructora con el Alumno, que reciba nombre edad , email y idiomas como parametro
+class Alumno {
+    //la clase alumno va a tener un nombre y apellido, edad, email y los idiomas que sabe
+    constructor (name, age, email,languages){
+        this.name=name;
+        this.age=age;
+        this.email=email;
+        this.languages=languages;
+    }
+    presentacion() {
+        console.log("hola soy "+ this.name +" tengo "+this.age+ " y me gustaria aprender: "+ this.languages)
+      }
+}
+//===========Inicializo Variables===========
 const alumnos=[];
+
+//===========Construccion de funciones==========
 function chequearEmail(email)
 {
     //creo la variable emailValidation que devuelve true si el email es correcto o false si encontro un error.
@@ -62,7 +80,7 @@ function chequearCantAlumnos(cant)
     if ((isNaN(cantAlumnos)===false) && (Number.isInteger(cantAlumnos)===true))
     {
         //valido que la cant ingresada sea mayor a 1. 
-        if (cantAlumnos>1===true){
+        if (cantAlumnos>=1===true){
             //pongo la variable en true.
             cantValidada=true;
         }
@@ -75,19 +93,20 @@ function agregarAlumno(alumnos,alumno)
     alumnos.push(alumno);
     alert("usuario agregado exitosamente!")
 }
-
-//creo clase constructora con el Alumno, que reciba nombre edad , email y idiomas como parametro
-class Alumno {
-    //la clase alumno va a tener un nombre y apellido, edad, email y los idiomas que sabe
-    constructor (name, age, email,languages){
-        this.name=name;
-        this.age=age;
-        this.email=email;
-        this.languages=languages;
-    }
-    presentacion() {
-        console.log("hola soy "+ this.name +" tengo "+this.age+ "y me gustaria aprender: "+ this.languages)
-      }
+function obtenerPromedio(alumnos)
+{
+    var acumuladorEdades=0
+    var contEdades=0;
+    for (const item of alumnos)
+        {
+            // edad=parseInt(item.age)
+            acumuladorEdades=parseInt(acumuladorEdades)+parseInt(item.age);
+            contEdades=contEdades+1;
+        }
+        parseInt(contEdades);
+        var promedioEdades=0;
+        promedioEdades=(acumuladorEdades/contEdades);
+        return promedioEdades;
 }
 
 //creo variables para los atributos  del Alumno, nombre,edad,email,idiomas.
@@ -97,6 +116,7 @@ class Alumno {
 //mientras que sea false repito el proceso, pidiendo un nuevo prompt y llamando nuevamente a la funcion y actualizando la variable de estado con el estado de la llamada a la funcion
 //repito hasta que la variable sea en true, es decir que los datos fueron bien ingresados!
 
+//===========Invocacion de funciones==========
 
 //ingreso la cantidad de alumnos a ingresar por el usuario para ir agregandolos a la lista
 let cantAlumnos=parseInt(prompt("ingrese la cantidad de alumnos a crear:"));
@@ -166,5 +186,9 @@ console.log(mayores)
 
 let menores=alumnos.filter(item =>item.age <18);
 console.log(menores)
+
+var promedio=obtenerPromedio(alumnos);
+console.log(`el promedio de edades  es ${promedio}`)
+
 
 

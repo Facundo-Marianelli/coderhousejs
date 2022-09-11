@@ -16,6 +16,8 @@ estos atributos son validados sintaticamente a traves de las funciones "Chequear
 chequearNombreArrow --> funcion flecha que valida el nombre sintaticamente.
 
 funcionAgregarAlumno--> agrega el alumno a la lista creada de Alumnos.
+funcionObtenerPromedio--> para obtener el promedio de los alumnos ingresados
+
 
 --->Se incorpora la cantidad de alumnos a cargar por el usuario para hacer el array un poco mas dinamico, mas adelante sera a jugar con el dom y algún boton de agregarUsuario.
 --->Se incorpora el filter, para filtrar datos segun un parametro indicado, en este caso se filtro por mayores y menores, aquellos donde el age del objeto Alumno sea mayor a 18 para mayores y menores a 18 para los menores.

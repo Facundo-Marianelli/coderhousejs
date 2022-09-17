@@ -12,11 +12,11 @@ para esta primer entrega, se realizo una clase Alumno, donde se se le asignaron 
 -->Email
 -->Idiomas
 
-estos atributos son validados sintaticamente a traves de las funciones "Chequear", una vez validado sintaticamente voy a la clase constructor donde inicializo la clase Alumno con los respectivos atributos.
-chequearNombreArrow --> funcion flecha que valida el nombre sintaticamente.
+estos atributos son validados sintaticamente a traves de las funciones "Chequear", una vez validado sintaticamente con las funciones "chequear" voy a la clase constructor donde inicializo la clase Alumno con los respectivos atributos.
 
+chequearNombreArrow --> funcion flecha que valida el nombre sintaticamente.
 funcionAgregarAlumno--> agrega el alumno a la lista creada de Alumnos.
-funcionObtenerPromedio--> para obtener el promedio de los alumnos ingresados
+funcionObtenerPromedio--> para obtener el promedio de edad de los alumnos ingresados
 
 
 --->Se incorpora la cantidad de alumnos a cargar por el usuario para hacer el array un poco mas dinamico, mas adelante sera a jugar con el dom y algún boton de agregarUsuario.

@@ -96,7 +96,7 @@ function renderizarFiltrados() {
   let htmlFiltrados = "";
   filtros.forEach((alumnoFiltrado) => {
     console.log(alumnoFiltrado.nombre)
-    htmlFiltrados += `
+    htmlFiltrados = `
         <div class="col-12 mb-5 d-flex flex-row justify-content-center">
         <div class="card text-dark flex-row" style="width: 30rem;">
         <div>
@@ -113,7 +113,6 @@ function renderizarFiltrados() {
         </div>
         `;
     itemFiltrados.innerHTML += htmlFiltrados;
-    //los agrego al costado de la pantalla principal.
   });
 
 }
@@ -141,12 +140,7 @@ function verFiltrados() {
   alumnosDatos.forEach((alumno) => {
     if (alumno.sexo===sexo)
     {
-      
-      if(!filtros.includes(alumno)){
-        //si no esta agregado, agrego y luego del forEach renderizo.
-        filtros.push(alumno);
-      }
-      
+      filtros.push(alumno);
     }
   }
   )

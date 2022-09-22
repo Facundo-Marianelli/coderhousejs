@@ -106,9 +106,6 @@ function renderizarFiltrados() {
   let htmlFiltrados = "";
   console.log(filtros)
   filtros.forEach((alumnoFiltrado) => {
-    console.log("vemos:")
-    console.log(filtros.includes(alumnoFiltrado));
-    console.log(alumnoFiltrado.nombre)
     htmlFiltrados = `
         <div class="col-12 mb-5 d-flex flex-row justify-content-center">
         <div class="card text-dark flex-row" style="width: 30rem;">
@@ -183,9 +180,6 @@ function verFiltrosPorNivel() {
         {
           filtrosRenderizados.push(alumno);
           filtros.push(alumno);
-        }
-        else{
-          alert("ya estaba")
         }
       }
     }

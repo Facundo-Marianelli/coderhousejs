@@ -4,8 +4,9 @@ const alumnosDatos = [
   nombre: "Facundo",
   edad: 23,
   sexo: "M",
+  nivel: "B1",
   email: "facumarianelli@gmail.com",
-  idiomas: "Frances, Ingles",
+  idiomas: ["Frances", "Ingles"],
   img: "https://res.cloudinary.com/dgvlsnajj/image/upload/v1663381942/Avatar_gob5i5.png",
 },
 {
@@ -13,8 +14,9 @@ const alumnosDatos = [
   nombre: "Andres",
   edad: 23,
   sexo: "F",
+  nivel: "B1",
   email: "andres1@gmail.com",
-  idiomas: "Ingles",
+  idiomas: ["Ingles"],
   img: "https://res.cloudinary.com/dgvlsnajj/image/upload/v1663381942/Avatar_gob5i5.png",
 },
 {
@@ -22,8 +24,9 @@ const alumnosDatos = [
   nombre: "Pedro",
   edad:21,
   sexo: "NA",
+  nivel: "A2",
   email: "pedro@gmail.com",
-  idiomas: "Frances",
+  idiomas: ["Frances"],
   img: "https://res.cloudinary.com/dgvlsnajj/image/upload/v1663381942/Avatar_gob5i5.png",
 },
 {
@@ -31,14 +34,19 @@ const alumnosDatos = [
   nombre: "Pedro",
   edad:21,
   sexo: "F",
+  nivel: "A1",
   email: "pedro@gmail.com",
-  idiomas: "Frances",
+  idiomas: ["Frances"],
   img: "https://res.cloudinary.com/dgvlsnajj/image/upload/v1663381942/Avatar_gob5i5.png",
 }
 
 ];
-  
+
+let niveles= ["A1","A2","B1","B2"]
+
 let filtros = [];
+
+const filtrosRenderizados =[];
 
 //obtengo los elementos del html el cual dispara eventos y luego agrego click para disparar el evento con su funcion.
 
@@ -52,9 +60,11 @@ cambiar.addEventListener("click", cambiarColoresBotones);
 const vacio=document.querySelector("#ver");
 vacio.addEventListener("click", verFiltrados);
 
-// const carritoHTML = document.querySelector("#carrito");
+const alumnosFiltrados=document.querySelector("#filtrarPorNivel");
+alumnosFiltrados.addEventListener("click",verFiltrosPorNivel)
 
-//*Pintar productos en la tienda
+const restartFiltros= document.querySelector("#resetearFiltros");
+restartFiltros.addEventListener("click", resetFiltros)
 
 function renderizarAlumnos() {
   alumnosDatos.forEach((alumno) => {
@@ -94,7 +104,10 @@ renderizarAlumnos();
 function renderizarFiltrados() {
   console.log(filtros.length)
   let htmlFiltrados = "";
+  console.log(filtros)
   filtros.forEach((alumnoFiltrado) => {
+    console.log("vemos:")
+    console.log(filtros.includes(alumnoFiltrado));
     console.log(alumnoFiltrado.nombre)
     htmlFiltrados = `
         <div class="col-12 mb-5 d-flex flex-row justify-content-center">
@@ -140,11 +153,45 @@ function verFiltrados() {
   alumnosDatos.forEach((alumno) => {
     if (alumno.sexo===sexo)
     {
-      filtros.push(alumno);
+      if (filtrosRenderizados.includes(alumno)==false)
+      {
+        filtrosRenderizados.push(alumno);
+        filtros.push(alumno);
+      }
     }
   }
   )
   renderizarFiltrados();
+};
+
+function resetFiltros() {
+  window.location.reload();
+}
+
+function verFiltrosPorNivel() {
+  var valorInput = document. querySelector('input'). value;
+  valorInput=valorInput.toUpperCase();
+  if (niveles.includes(valorInput)===false)
+  {
+    alert("Ingreso un nivel no encontrado")
+  }
+  else{
+    alumnosDatos.forEach((alumno) => {
+    if (alumno.nivel===valorInput)
+      {
+        if(filtrosRenderizados.includes(alumno)==false)
+        {
+          filtrosRenderizados.push(alumno);
+          filtros.push(alumno);
+        }
+        else{
+          alert("ya estaba")
+        }
+      }
+    }
+    )
+    renderizarFiltrados();
+  }
 };
 
 //muestro los datos por consola, encuentro el ID que esta asociado al click que hago cuando toco el boton y llamo a la funcion con el onClick.

@@ -21,14 +21,18 @@
           <!--* Acá se van a pintar los alumnos -->
         </main>
         <aside class="col-sm-4">
-          <h1>Alumnos Filtrados:</h1>
+          <h1>Alumnos Filtrados(filtros acumulados):</h1>
           <ul id="alumnosFiltrados" class="list-group"></ul>
           <!--* alumnos añadidos al curso -->
           <hr />
           
           <button id="cambiarColores" type="button" class="btn btn-danger">Cambiar color botones</button>
-          <button id="ver" type="button" class="btn btn danger">Filtrar Alumnos</button>
-          
+          <button id="ver" type="button" class="btn btn danger">Filtrar Alumnos por sexo</button>
+          <br></br>
+          <p>Nuestros niveles disponibles son: A1, A2, B1, B2</p>
+          <input id placeholder="Ingrese el nivel y click -->">
+          <button id="filtrarPorNivel" type="button" class="btn btn danger">Filtrar Alumnos Nivel:</button>
+          <button id="resetearFiltros" type="button" class="btn btn danger">Resetear Filtros/colores:</button>
         </aside>
       </div>
     </div>

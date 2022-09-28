@@ -30,7 +30,7 @@ const alumnosDatos = [
   img: "https://res.cloudinary.com/dgvlsnajj/image/upload/v1663381942/Avatar_gob5i5.png",
 },
 {
-  id: 3,
+  id: 4,
   nombre: "Pedro",
   edad:21,
   sexo: "F",
@@ -90,6 +90,7 @@ function renderizarAlumnos() {
                 <h5 class="card-title">${alumno.nombre}</h5>
                 <p>tiene interes en aprender: ${alumno.idiomas}</p>
                 <p>${alumno.email}</p>
+                <p>${alumno.id}</p>
                 <button class="btn btn-primary" id="cambioColor" onClick="mostrarDatosConsola(${alumno.id})">Ver todos los datos</button>
             </div>
         </div>
@@ -102,11 +103,13 @@ renderizarAlumnos();
 
 //renderizo los items filtrados.
 function renderizarFiltrados() {
+  itemFiltrados.innerHTML="";
   console.log(filtros.length)
-  let htmlFiltrados = "";
+  // let htmlFiltrados = "";
   console.log(filtros)
   filtros.forEach((alumnoFiltrado) => {
-    htmlFiltrados = `
+    let htmlFiltrados = `
+        <h4>${alumnoFiltrado.nivel}</h4>
         <div class="col-12 mb-5 d-flex flex-row justify-content-center">
         <div class="card text-dark flex-row" style="width: 30rem;">
         <div>
@@ -116,7 +119,7 @@ function renderizarFiltrados() {
                 <h5 class="card-title">${alumnoFiltrado.nombre}</h5>
                 <p>${alumnoFiltrado.edad}</p>
                 <p>${alumnoFiltrado.email}</p>
-                
+  
             </div>
 
         </div>

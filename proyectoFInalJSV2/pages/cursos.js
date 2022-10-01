@@ -23,16 +23,10 @@ const cursos = [
 
 //defino el local storage.
 
-let DatosCursos=JSON.parse(localStorage.getItem("cursos"));
+localStorage.length === 0 && localStorage.setItem("cursos",JSON.stringify(cursos));
+DatosCursos=localStorage.getItem("cursos") || localStorage.setItem("cursos",JSON.stringify(cursos));
 
-if(DatosCursos!=null)
-{
-    console.log("los datos ya estan cargados.")
-    
-}
-else if (DatosCursos===null){
-    localStorage.setItem("cursos" , JSON.stringify(cursos));
-}
+
 
 //inicializo variables
 const items = document.querySelector("#items");
@@ -90,9 +84,9 @@ function crearCurso(nombre,nivel,idioma,profesor,precio) {
     cursos.push(newCurso);
     localStorage.setItem("cursos" , JSON.stringify(cursos));
     Swal.fire(
-    'Curso Creado exitosamente!',
-    'El curso fue agregado!',
-    'success'
+        'Curso Creado exitosamente!',
+        'El curso fue agregado!',
+        'success'
     )
     renderizarCursos();
 }

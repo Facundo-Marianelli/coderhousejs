@@ -68,16 +68,12 @@ const filtrosRenderizados =[];
 
 let datosAlumnos=JSON.parse(localStorage.getItem("alumnos"));
 
+//optimizo
 
-if(datosAlumnos!=null)
-{
-    console.log("los datos ya estan cargados.")
-    
-}
-else if (datosAlumnos===null){
-    alert("es null , entramos")
-    localStorage.setItem("alumnos" , JSON.stringify(alumnosDatos));
-}
+localStorage.length === 0 && localStorage.setItem("alumnos",JSON.stringify(alumnosDatos));
+
+alumnos=localStorage.getItem("cursos") || localStorage.setItem("cursos",JSON.stringify(alumnosDatos));
+
 
 
 //obtengo los elementos del html el cual dispara eventos y luego agrego click para disparar el evento con su funcion.
@@ -193,14 +189,9 @@ function verFiltrados() {
     sexo = sexo.toUpperCase();
     let alumnos=JSON.parse(localStorage.getItem("alumnos"));
     alumnos.forEach((alumno) => {
-    if (alumno.sexo===sexo)
-    {
-        if (filtrosRenderizados.includes(alumno)==false)
-        {
-        filtrosRenderizados.push(alumno);
-        filtros.push(alumno);
-        }
-    }
+
+        //Optimizo 
+        alumno.sexo===sexo ? filtros.push(alumno) : console.log("no es del sexo indicado");
     }
     )
     renderizarFiltrados();
@@ -217,19 +208,19 @@ function verFiltrosPorNivel() {
     valorInput=valorInput.toUpperCase();
     if (niveles.includes(valorInput)===false)
     {
-    alert("Ingreso un nivel no encontrado")
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'No se encontro el nivel!',
+            footer: '<a href="">Ingrese un nivel valido por favor</a>'
+          })
     }
     else{
     let alumnos=JSON.parse(localStorage.getItem("alumnos"));
     alumnos.forEach((alumno) => {
-    if (alumno.nivel===valorInput)
-        {
-        if(filtrosRenderizados.includes(alumno)==false)
-        {
-            filtrosRenderizados.push(alumno);
-            filtros.push(alumno);
-        }
-        }
+
+        //OPTIMIZO
+        alumno.nivel===valorInput ? filtros.push(alumno) : console.log("no es del nivel indicado");
     }
     )
     renderizarFiltrados();
@@ -253,6 +244,10 @@ function crearAlumno(nombre,edad,email,idiomas){
     const newAlumno = new Alumno (id,nombre,edad,email,idiomas);
     alumnos.push(newAlumno);
     localStorage.setItem("alumnos", JSON.stringify(alumnos));
-    alert("Alumno creado exitosamente!")
+    Swal.fire(
+        'Alumno Creado exitosamente!',
+        'El Alumno fue agregado!',
+        'success'
+        )
     renderizarAlumnos();
 }

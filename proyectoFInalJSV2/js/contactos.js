@@ -1,44 +1,42 @@
 const obtenerInfo = document.querySelector("#enviarDatosContacto");
 obtenerInfo.addEventListener("click" ,getInfo)
 
-const usuariosGitHub=[];
+const correos=[];
 
 function getInfo() {
     Swal.fire({
-        title: 'Dejanos tu usuario de gitHub!',
+        title: 'Dejanos tu email!',
         input: 'text',
         inputAttributes: {
           autocapitalize: 'off'
         },
         showCancelButton: true,
-        confirmButtonText: 'Look up',
+        confirmButtonText: 'Enviar',
         showLoaderOnConfirm: true,
         preConfirm: (login) => {
             //agregamos el usuario de gitHub a nuestro arreglo de usuarios
-            usuariosGitHub.push(login);
-          return fetch(`//api.github.com/users/${login}`)
-            .then(response => {
-              if (!response.ok) {                
-                throw new Error(response.statusText)
-              }
-              return response.json()
-            })
-            .catch(error => {
-              Swal.showValidationMessage(
-                `Request failed: ${error}`
-              )
-            })
+            if(login.includes(".")==true && login.includes(".com")==true)
+            {
+              Swal.fire(
+                'contacto guardado exitosamente!',
+                'El contacto fue agregado!',
+                'success'
+                )
+                correos.push(login)
+            }
+            else{
+              Swal.fire({
+                icon: 'error',
+                title: 'Error...',
+                text: 'Algo salio mal!',
+                footer: '<a href="">Incluyo @ y .com ?</a>'
+              })
+            }
+
         },
         allowOutsideClick: () => !Swal.isLoading()
       }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-            title: `${result.value.login}'s avatar`,
-
-            imageUrl: result.value.avatar_url
-          })
-        }
       })
 }
 
-console.log(usuariosGitHub);
+console.log(correos);

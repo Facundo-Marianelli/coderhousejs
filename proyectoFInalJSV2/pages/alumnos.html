@@ -64,11 +64,38 @@
             <body>
                 <h2>Crear Alumno</h2>
                 <div id="datosNuevoAlumno">
-                    <input type="text" placeholder="Nombre">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm">
+                                <input type="text" placeholder="Nombre">
+                            </div>
+                            <div class="col-sm">
+                                <input type="text" placeholder="Edad">
+                            </div>
+                            <div class="col-sm">
+                                <input type="text" placeholder="Email">
+                            </div>
+                           
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm">
+                                <input type="text" placeholder="Idiomas">
+                            </div>
+                            <div class="col-sm">
+                                <input type="text" placeholder="Nivel">
+                            </div>
+                            <div class="col-sm">
+                                <input type="text" placeholder="Sexo">
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!-- <input type="text" placeholder="Nombre">
                     <input type="text" placeholder="Edad">
                     <input type="text" placeholder="Email">
-                    <input type="text" placeholder="Idiomas">
-                    <button type="button" class="btn btn-info" id="crearAlumno">Crear Alumno</button>
+                    <input type="text" placeholder="Idiomas"> -->
+                    <button type="button" class="btn btn-primary" id="crearAlumno">Crear Alumno</button>
                 </div>
                 <h1 id="titulo">Nuestros Alumnos:</h1>
                 <div class="container" id="container">
@@ -85,7 +112,7 @@
                       <button id="cambiarColores" type="button" class="btn btn-danger">Cambiar color botones</button>
                       <button id="ver" type="button" class="btn btn-danger">Filtrar Alumnos por sexo</button>
                       <br></br>
-                      <p>Nuestros niveles disponibles son: A1, A2, B1, B2</p>
+                      <p>Nuestros niveles disponibles son: A1, A2, B1, B2, C1 , C2</p>
                       <input id="valorFiltro" placeholder="Ingrese el nivel y click -->">
                       <button id="filtrarPorNivel" type="button" class="btn btn-danger">Filtrar Alumnos Nivel:</button>
                       <button id="resetearFiltros" type="button" class="btn btn-danger">Resetear Filtros/colores:</button>

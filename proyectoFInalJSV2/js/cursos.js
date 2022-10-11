@@ -9,12 +9,13 @@ class Curso {
         this.profesor=profesor;
         this.precio=precio;
     }
-    presentacion() {
-        console.log("hola soy "+ this.name +" tengo "+this.age+ " y me gustaria aprender: "+ this.languages)
-      }
+    // presentacion() {
+    //     console.log("hola soy "+ this.name +" tengo "+this.age+ " y me gustaria aprender: "+ this.languages)
+    //   }
 }
 
 //inicializo variables:
+let niveles= ["A1","A2","B1","B2","C1","C2"]
 
 const cursos = [
  {  id: 1, nombre: "Curso de ingles para Economía", nivel: "A2" , idioma: "Ingles" , profesor: "Adriana" , precio: 4000    },
@@ -22,6 +23,8 @@ const cursos = [
 ]
 
 //defino el local storage.
+
+var estados=[];
 
 localStorage.length === 0 && localStorage.setItem("cursos",JSON.stringify(cursos));
 DatosCursos=localStorage.getItem("cursos") || localStorage.setItem("cursos",JSON.stringify(cursos));
@@ -68,26 +71,84 @@ function renderizarCursos() {
 
 renderizarCursos();
 
+//creo arrow functions para validar los datos ingresados
+
+function chequearPrecio(precio){
+    let precioValidado=false;
+    //lo convierto a numero la edad, conservado sus decimales en caso que contenga
+    precio= Number(precio)
+    //si es un numero, y es un entero, estamos bien
+    if ((isNaN(precio)===false) && (Number.isInteger(precio)===true))
+    {
+        //valido que la edad sea mayor a 2. 
+        if (precio>0===true){
+            //pongo la variable en true.
+            precioValidado=true;
+        }
+    }
+    return precioValidado;
+}
+
+const chequearNombreArrow = (nombre) => isNaN(nombre) ?  true : false;
+const chequearNivelArrow = (nivel) => niveles.includes(nivel.toUpperCase()) ?  true : false; 
+const chequearIdiomasArrow = (idiomas) => isNaN(idiomas) ? true : false;
+const chequearProfesorArrow = (profesor) => isNaN(profesor) ? true : false;
+
 
 function crearCurso(nombre,nivel,idioma,profesor,precio) {
     var valores=document.querySelector("#valoresNuevoCurso");
     const inputElements = valores.querySelectorAll("input");
     let cursos=JSON.parse(localStorage.getItem("cursos"));
     console.log(inputElements);
+
+    //valido datos:
     nombre=inputElements[0].value;
+    nombreValidationState=chequearNombreArrow(nombre);
+    estados.push(nombreValidationState);
+
     nivel=inputElements[1].value;
+    nivelValidationState=chequearNivelArrow(nivel);
+    estados.push(nivelValidationState);
+
     idioma=inputElements[2].value;
+    idiomaValidadoState=chequearIdiomasArrow(idioma);
+    estados.push(idiomaValidadoState);
+
     profesor=inputElements[3].value;
+    profesorValidadoState=chequearProfesorArrow(profesor);
+    estados.push(profesorValidadoState);
+
+
     precio=inputElements[4].value;
-    let id=cursos.length+1;
-    const newCurso= new Curso(id,nombre,nivel,idioma,profesor,precio);
-    cursos.push(newCurso);
-    localStorage.setItem("cursos" , JSON.stringify(cursos));
-    Swal.fire(
-        'Curso Creado exitosamente!',
-        'El curso fue agregado!',
-        'success'
-    )
-    renderizarCursos();
+    precioValidadoState=chequearPrecio(precio);
+    estados.push(precioValidadoState);
+
+    alert("antes de validar")
+    if (estados.includes(false))
+    {
+        Swal.fire({
+            icon: 'error',
+            title: 'Ha ocurrido un error...',
+            text: 'Por favor valide los datos ingresados!',
+            footer: '<a href="">Lea el readme para validar los datos aceptados :)</a>'
+          })
+          estados=[];
+    }
+    else if (estados.includes(false)==false)
+    {
+        let id=cursos.length+1;
+        const newCurso= new Curso(id,nombre,nivel,idioma,profesor,precio);
+        cursos.push(newCurso);
+        localStorage.setItem("cursos" , JSON.stringify(cursos));
+        Swal.fire(
+            'Curso Creado exitosamente!',
+            'El curso fue agregado!',
+            'success'
+        )
+        estados=[];
+        renderizarCursos();
+    }
+    console.log("estados,",estados);
+
 }
 

@@ -1,12 +1,16 @@
+// import valores2 from "../data/niveles.json";
+
 //clase constructora de Alumno
 class Alumno {
     //la clase alumno va a tener un nombre y apellido, edad, email y los idiomas que sabe
-    constructor (id,nombre, edad, email,idiomas){
+    constructor (id,nombre, edad, email,idiomas,nivel,sexo){
         this.id=id;
         this.nombre=nombre;
         this.edad=edad;
         this.email=email;
         this.idiomas=idiomas;
+        this.nivel=nivel;
+        this.sexo=sexo;
     }
     presentacion() {
         console.log("hola soy "+ this.name +" tengo "+this.age+ " y me gustaria aprender: "+ this.languages)
@@ -58,9 +62,20 @@ const alumnosDatos = [
 }
     
 ];
+// const conseguirNiveles = async () => {
+//     try {
+//         const nivelesJSON = await fetch ("../data/niveles.json");
+//         const data = await reponse.json();
+//         console.log(data);
+//         console.log(nivelesJSON);
 
-let niveles= ["A1","A2","B1","B2"]
-    
+//     } catch (error) {
+//         console.log(error);
+//   }
+// }
+// conseguirNiveles();
+
+let niveles= ["A1","A2","B1","B2","C1","C2"]
 let filtros = [];
 
 const filtrosRenderizados =[];
@@ -233,21 +248,109 @@ function mostrarDatosConsola(id){
     let alumno = alumnos.find((alumno) => alumno.id === id);
     alert(`abra la consola para ver todos los datos de ${alumno.nombre}`)
     console.log(alumno);
+
 }
+//funcion para chequear que la edad este bien ingresada
+function chequearEdad(edad){
+    let edadValidada=false;
+    //lo convierto a numero la edad, conservado sus decimales en caso que contenga
+    edad= Number(edad)
+    //si es un numero, y es un entero, estamos bien
+    if ((isNaN(edad)===false) && (Number.isInteger(edad)===true))
+    {
+        //valido que la edad sea mayor a 2. 
+        if (edad>2===true){
+            //pongo la variable en true.
+            edadValidada=true;
+        }
+    }
+    return edadValidada
+}
+
+
+async function obtenerNiveles () {
+    const jsonstatus = await fetch("../data/niveles.json");
+    valoresNivelesJson= await jsonstatus.json();
+    //console.log("jsonstatus2",jstonStatus2);
+    // fetch("../data/niveles.json")
+    // .then(response => response.json())
+    // .then(data => {
+    //     console.log(data);
+    //     nivelesJSON = [...data];
+    //     console.log(nivelesJSON);
+    //     return nivelesJSON;
+    // })
+}
+
+let valoresNivelesJson;
+obtenerNiveles();
+
+// console.log("valores2",valores2);
+
+//declaro arrow functions para validar los datos del nuevo alumno
+
+
+const chequearNombreArrow = (nombre) => isNaN(nombre) ?  true : false;
+const chequearEmailArrow = (email) => email.includes(".com") && email.includes("@") ?  true : false; 
+const chequearIdiomasArrow = (idiomas) => isNaN(idiomas) ? true : false;
+const chequearNivelArrow = (nivel) => valoresNivelesJson.find(item => item.nivel === nivel.toUpperCase())  ? true : false;
+const chequearSexoArrow = (sexo) => isNaN(sexo) ? true : false;
+
+
+// const chequearNombreArrow = (nombre) => isNaN(nombre) ?  true : false;
 function crearAlumno(nombre,edad,email,idiomas){
+    var estados =[];
+    console.log("valores en crear alumno",valoresNivelesJson);
     let alumnos=JSON.parse(localStorage.getItem("alumnos"));
+    //a continuacion se capturan los datos de los inputs y se validan 
+
     nombre =inputs[0].value;
+    nombreValidationState=chequearNombreArrow(nombre);
+    estados.push(nombreValidationState);
+
     edad = inputs[1].value;
+    edadValidadaState=chequearEdad(edad);
+    estados.push(edadValidadaState);
+
     email =inputs[2].value;
+    emailValidatationState=chequearEmailArrow(email);
+    estados.push(emailValidatationState)
+
+
     idiomas = inputs[3].value;
-    id=alumnos.length+1;
-    const newAlumno = new Alumno (id,nombre,edad,email,idiomas);
-    alumnos.push(newAlumno);
-    localStorage.setItem("alumnos", JSON.stringify(alumnos));
-    Swal.fire(
-        'Alumno Creado exitosamente!',
-        'El Alumno fue agregado!',
-        'success'
-        )
-    renderizarAlumnos();
+    idiomasValidationState=chequearIdiomasArrow(idiomas);
+    estados.push(idiomasValidationState);
+
+    nivel=inputs[4].value;
+    nivelValidationState=chequearNivelArrow(nivel);
+    alert(nivelValidationState);
+    estados.push(nivelValidationState);
+
+    sexo=inputs[5].value;
+
+    //el array estados contiene cada validacion de los datos, para luego ver si hay algun false devolver error, si son todos true
+    // estan los datos ok.
+    if (estados.includes(false))
+    {
+        Swal.fire({
+            icon: 'error',
+            title: 'Ha ocurrido un error...',
+            text: 'Por favor valide los datos ingresados!',
+            footer: '<a href="">Lea el readme para validar los datos aceptados :)</a>'
+          })
+          estados=[];
+    }
+    else if(estados.includes(false)===false){
+        id=alumnos.length+1;
+        const newAlumno = new Alumno (id, nombre, edad, email, idiomas, nivel, sexo);
+        alumnos.push(newAlumno);
+        localStorage.setItem("alumnos", JSON.stringify(alumnos));
+        Swal.fire(
+            'Alumno Creado exitosamente!',
+            'El Alumno fue agregado!',
+            'success'
+            )
+            estados=[];
+        renderizarAlumnos();
+    }
 }

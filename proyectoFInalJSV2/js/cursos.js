@@ -26,8 +26,22 @@ const cursos = [
 
 var estados=[];
 
-localStorage.length === 0 && localStorage.setItem("cursos",JSON.stringify(cursos));
-DatosCursos=localStorage.getItem("cursos") || localStorage.setItem("cursos",JSON.stringify(cursos));
+let datosCursos=JSON.parse(localStorage.getItem("cursos"));
+
+
+if(datosCursos!=null)
+{
+    console.log("los datos ya estan cargados.")
+    
+}
+else if (datosCursos===null){
+    // alert("es null , entramos")
+    localStorage.setItem("alumnos" , JSON.stringify(cursos));
+}
+
+
+// localStorage.length === 0 && localStorage.setItem("cursos",JSON.stringify(cursos));
+// DatosCursos=localStorage.getItem("cursos") || localStorage.setItem("cursos",JSON.stringify(cursos));
 
 
 

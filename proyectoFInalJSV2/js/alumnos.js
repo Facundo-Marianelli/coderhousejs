@@ -83,11 +83,24 @@ const filtrosRenderizados =[];
 
 let datosAlumnos=JSON.parse(localStorage.getItem("alumnos"));
 
+
+if(datosAlumnos!=null)
+{
+    console.log("los datos ya estan cargados.")
+    
+}
+else if (datosAlumnos===null){
+    // alert("es null , entramos")
+    localStorage.setItem("alumnos" , JSON.stringify(alumnosDatos));
+}
+
+//let datosAlumnos=JSON.parse(localStorage.getItem("alumnos"));
+
 //optimizo
 
-localStorage.length === 0 && localStorage.setItem("alumnos",JSON.stringify(alumnosDatos));
+// localStorage.length === 0 && localStorage.setItem("alumnos",JSON.stringify(alumnosDatos));
 
-alumnos=localStorage.getItem("cursos") || localStorage.setItem("cursos",JSON.stringify(alumnosDatos));
+// alumnos=localStorage.getItem("cursos") || localStorage.setItem("cursos",JSON.stringify(alumnosDatos));
 
 
 
@@ -323,11 +336,8 @@ function crearAlumno(nombre,edad,email,idiomas){
 
     nivel=inputs[4].value;
     nivelValidationState=chequearNivelArrow(nivel);
-    alert(nivelValidationState);
     estados.push(nivelValidationState);
-
     sexo=inputs[5].value;
-
     //el array estados contiene cada validacion de los datos, para luego ver si hay algun false devolver error, si son todos true
     // estan los datos ok.
     if (estados.includes(false))

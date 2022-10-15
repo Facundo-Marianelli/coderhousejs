@@ -19,31 +19,19 @@ let niveles= ["A1","A2","B1","B2","C1","C2"]
 
 const cursos = [
  {  id: 1, nombre: "Curso de ingles para Economía", nivel: "A2" , idioma: "Ingles" , profesor: "Adriana" , precio: 4000    },
- {  id: 2, nombre: "Curso de ingles para Principiates", nivel: "A1" , idioma: "Ingles" , profesor: "Pepe" , precio: 2000    }
+ {  id: 2, nombre: "Curso de ingles para Principiates", nivel: "A1" , idioma: "Ingles" , profesor: "Pepe" , precio: 2000    },
+ {  id: 2, nombre: "Curso de ingles para Principiates2", nivel: "A1" , idioma: "Ingles" , profesor: "Pepe" , precio: 2000    }
 ]
 
 //defino el local storage.
 
+
+
 var estados=[];
 
-let datosCursos=JSON.parse(localStorage.getItem("cursos"));
+let datosDeCursos=JSON.parse(localStorage.getItem("cursos"));
 
-
-if(datosCursos!=null)
-{
-    console.log("los datos ya estan cargados.")
-    
-}
-else if (datosCursos===null){
-    // alert("es null , entramos")
-    localStorage.setItem("alumnos" , JSON.stringify(cursos));
-}
-
-
-// localStorage.length === 0 && localStorage.setItem("cursos",JSON.stringify(cursos));
-// DatosCursos=localStorage.getItem("cursos") || localStorage.setItem("cursos",JSON.stringify(cursos));
-
-
+datosDeCursos!=null ? console.log("los datos ya estan cargados.") : localStorage.setItem("cursos" , JSON.stringify(cursos));
 
 //inicializo variables
 const items = document.querySelector("#items");
@@ -136,8 +124,6 @@ function crearCurso(nombre,nivel,idioma,profesor,precio) {
     precio=inputElements[4].value;
     precioValidadoState=chequearPrecio(precio);
     estados.push(precioValidadoState);
-
-    alert("antes de validar")
     if (estados.includes(false))
     {
         Swal.fire({

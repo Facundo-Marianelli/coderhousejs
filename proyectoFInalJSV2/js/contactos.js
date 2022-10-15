@@ -1,7 +1,13 @@
 const obtenerInfo = document.querySelector("#enviarDatosContacto");
 obtenerInfo.addEventListener("click" ,getInfo)
+const correos= [
+  {email:"facumarianelli@gmail.com"}
+]
+// var correos=[];
 
-const correos=[];
+let datosCorreos=JSON.parse(localStorage.getItem("correos"));
+
+datosCorreos!=null ? console.log("los datos ya estan cargados.") : localStorage.setItem("correos" , JSON.stringify(correos));
 
 function getInfo() {
     Swal.fire({
@@ -22,7 +28,9 @@ function getInfo() {
                 'El contacto fue agregado!',
                 'success'
                 )
-                correos.push(login)
+                let correos=JSON.parse(localStorage.getItem("correos"));
+                correos.push(login);
+                localStorage.setItem("correos", JSON.stringify(correos));
             }
             else{
               Swal.fire({

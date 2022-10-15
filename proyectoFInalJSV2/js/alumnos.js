@@ -62,18 +62,7 @@ const alumnosDatos = [
 }
     
 ];
-// const conseguirNiveles = async () => {
-//     try {
-//         const nivelesJSON = await fetch ("../data/niveles.json");
-//         const data = await reponse.json();
-//         console.log(data);
-//         console.log(nivelesJSON);
 
-//     } catch (error) {
-//         console.log(error);
-//   }
-// }
-// conseguirNiveles();
 
 let niveles= ["A1","A2","B1","B2","C1","C2"]
 let filtros = [];
@@ -83,24 +72,7 @@ const filtrosRenderizados =[];
 
 let datosAlumnos=JSON.parse(localStorage.getItem("alumnos"));
 
-
-if(datosAlumnos!=null)
-{
-    console.log("los datos ya estan cargados.")
-    
-}
-else if (datosAlumnos===null){
-    // alert("es null , entramos")
-    localStorage.setItem("alumnos" , JSON.stringify(alumnosDatos));
-}
-
-//let datosAlumnos=JSON.parse(localStorage.getItem("alumnos"));
-
-//optimizo
-
-// localStorage.length === 0 && localStorage.setItem("alumnos",JSON.stringify(alumnosDatos));
-
-// alumnos=localStorage.getItem("cursos") || localStorage.setItem("cursos",JSON.stringify(alumnosDatos));
+datosAlumnos!=null ? console.log("los datos ya estan cargados.") : localStorage.setItem("alumnos" , JSON.stringify(alumnosDatos));
 
 
 

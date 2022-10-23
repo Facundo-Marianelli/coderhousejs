@@ -60,7 +60,7 @@ Click derecho y abrir con su navegador preferido al archivo "Index.html"
 
 #Contactos
 
-al hacer click sobre el boton "Dejanos tu contacto!" usted podrá ingresar su correo el cual se guardara en nuestra sistema y luego sera contactado
+al hacer click sobre el boton "Dejanos tu contacto!" usted podrá ingresar su correo el cual se guardara en nuestra sistema y luego sera contactado a complementar con el back: una vez enviado el correo se guardaria en una base de datos.
 
 #Cotizar
 

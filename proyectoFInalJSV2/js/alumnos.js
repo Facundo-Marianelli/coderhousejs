@@ -3,7 +3,7 @@
 //clase constructora de Alumno
 class Alumno {
     //la clase alumno va a tener un nombre y apellido, edad, email y los idiomas que sabe
-    constructor (id,nombre, edad, email,idiomas,nivel,sexo){
+    constructor (id,nombre, edad, email,idiomas,nivel,sexo,img){
         this.id=id;
         this.nombre=nombre;
         this.edad=edad;
@@ -11,6 +11,7 @@ class Alumno {
         this.idiomas=idiomas;
         this.nivel=nivel;
         this.sexo=sexo;
+        this.img=img;
     }
     presentacion() {
         console.log("hola soy "+ this.name +" tengo "+this.age+ " y me gustaria aprender: "+ this.languages)
@@ -28,7 +29,7 @@ const alumnosDatos = [
     nivel: "B1",
     email: "facumarianelli@gmail.com",
     idiomas: ["Frances", "Ingles"],
-    img: "https://res.cloudinary.com/dgvlsnajj/image/upload/v1663381942/Avatar_gob5i5.png",
+    img: "https://res.cloudinary.com/dgvlsnajj/image/upload/v1663447133/Avatar_Hombre_xlw4dj.jpg",
 },
 {
     id: 2,
@@ -38,7 +39,7 @@ const alumnosDatos = [
     nivel: "B1",
     email: "josefina1@gmail.com",
     idiomas: ["Ingles"],
-    img: "https://res.cloudinary.com/dgvlsnajj/image/upload/v1663381942/Avatar_gob5i5.png",
+    img: "https://res.cloudinary.com/dgvlsnajj/image/upload/v1663447137/Avatar_Mujer_y5euoy.png",
 },
 {
     id: 3,
@@ -48,7 +49,7 @@ const alumnosDatos = [
     nivel: "A2",
     email: "pedro@gmail.com",
     idiomas: ["Frances"],
-    img: "https://res.cloudinary.com/dgvlsnajj/image/upload/v1663381942/Avatar_gob5i5.png",
+    img: "https://res.cloudinary.com/dgvlsnajj/image/upload/v1666493178/standardAvatar_hujpdk.jpg",
 },
 {
     id: 4,
@@ -58,7 +59,7 @@ const alumnosDatos = [
     nivel: "A1",
     email: "pedro@gmail.com",
     idiomas: ["Frances"],
-    img: "https://res.cloudinary.com/dgvlsnajj/image/upload/v1663381942/Avatar_gob5i5.png",
+    img: "https://res.cloudinary.com/dgvlsnajj/image/upload/v1663447137/Avatar_Mujer_y5euoy.png",
 }
     
 ];
@@ -109,17 +110,17 @@ function renderizarAlumnos() {
     let alumnos=JSON.parse(localStorage.getItem("alumnos"));
     alumnos.forEach((alumno) => {
     //si el alumno es Masculino, le defino la imagen de un avatar Masculino por defecto
-    if (alumno.sexo==="M"){
+    if (alumno.sexo==="M" || alumno.sexo==="m"){
     alumno.img="https://res.cloudinary.com/dgvlsnajj/image/upload/v1663447133/Avatar_Hombre_xlw4dj.jpg";
     }
     //si el Alumno es Femenino, le defino la imagen de un avatar Femenino por defecto
-    else if (alumno.sexo==="F")
+    else if (alumno.sexo==="F" || alumno.sexo==="f")
     {
     alumno.img="https://res.cloudinary.com/dgvlsnajj/image/upload/v1663447137/Avatar_Mujer_y5euoy.png";
     }
     //si no es definido o NA, le defino una imagen de un avatar por defecto.
     else{
-    alumno.img="https://res.cloudinary.com/dgvlsnajj/image/upload/v1663381942/Avatar_gob5i5.png";
+    alumno.img="https://res.cloudinary.com/dgvlsnajj/image/upload/v1666493178/standardAvatar_hujpdk.jpg";
     }
     //muestro datos por pantalla:
     let alumnoHTML = `
@@ -129,8 +130,9 @@ function renderizarAlumnos() {
             <div class="card-body">
                 <h5 class="card-title">${alumno.nombre}</h5>
                 <p>tiene interes en aprender: ${alumno.idiomas}</p>
-                <p>${alumno.email}</p>
-                <p>${alumno.id}</p>
+                <p>Email: ${alumno.email}</p>
+                <p>Nivel: ${alumno.nivel}</p>
+                <p>Edad: ${alumno.edad}</p>
                 <button class="btn btn-primary" id="cambioColor" onClick="mostrarDatosConsola(${alumno.id})">Ver todos los datos</button>
             </div>
         </div>
@@ -144,8 +146,6 @@ renderizarAlumnos();
 //renderizo los items filtrados.
 function renderizarFiltrados() {
     itemFiltrados.innerHTML="";
-    console.log(filtros.length)
-    console.log(filtros)
     filtros.forEach((alumnoFiltrado) => {
     let htmlFiltrados = `
         <h4>${alumnoFiltrado.nivel}</h4>
@@ -156,8 +156,9 @@ function renderizarFiltrados() {
         </div>
             <div class="card-body" >
                 <h5 class="card-title">${alumnoFiltrado.nombre}</h5>
-                <p>${alumnoFiltrado.edad}</p>
-                <p>${alumnoFiltrado.email}</p>
+                <p>Edad : ${alumnoFiltrado.edad}</p>
+                <p>Email: ${alumnoFiltrado.email}</p>
+                <p>Nivel : ${alumnoFiltrado.nivel}</p>
             </div>
         </div>
         </div>
@@ -170,7 +171,6 @@ function renderizarFiltrados() {
 function cambiarColoresBotones (){
     //obtengo todos los botones y cada uno le cambio el ID por botonesBlue, y luego le aplico el css.
     let botones=document.getElementsByTagName("button");
-    console.log(botones);
     for (const boton of botones)
     {
     boton.id="botonesBlue";
@@ -182,8 +182,8 @@ function verFiltrados() {
     var sexo= prompt("ingrese el sexo F (para chicas) o M (para chicos) o NA (si es sin definir), si ingresa una letra distinta no vera cambios");
     //mientras sea numero vuelvo a pedir
     while (isNaN(sexo)===false ){
-    alert("ingrese una letra")
-    var sexo= prompt("ingrese el sexo F (para chicas) o M (para chicos) o NA (si es sin definir)");
+        alert("ingrese una letra")
+        var sexo= prompt("ingrese el sexo F (para chicas) o M (para chicos) o NA (si es sin definir)");
     }
     //una vez q no es numero convierto en UpperCase y recorro todos los alumnos para encontrar condicidencia en el sexo.
     sexo = sexo.toUpperCase();
@@ -218,7 +218,6 @@ function verFiltrosPorNivel() {
     else{
     let alumnos=JSON.parse(localStorage.getItem("alumnos"));
     alumnos.forEach((alumno) => {
-
         //OPTIMIZO
         alumno.nivel===valorInput ? filtros.push(alumno) : console.log("no es del nivel indicado");
     }
@@ -244,7 +243,7 @@ function chequearEdad(edad){
     if ((isNaN(edad)===false) && (Number.isInteger(edad)===true))
     {
         //valido que la edad sea mayor a 2. 
-        if (edad>2===true){
+        if (edad>5===true){
             //pongo la variable en true.
             edadValidada=true;
         }
@@ -256,21 +255,11 @@ function chequearEdad(edad){
 async function obtenerNiveles () {
     const jsonstatus = await fetch("../data/niveles.json");
     valoresNivelesJson= await jsonstatus.json();
-    //console.log("jsonstatus2",jstonStatus2);
-    // fetch("../data/niveles.json")
-    // .then(response => response.json())
-    // .then(data => {
-    //     console.log(data);
-    //     nivelesJSON = [...data];
-    //     console.log(nivelesJSON);
-    //     return nivelesJSON;
-    // })
 }
 
 let valoresNivelesJson;
 obtenerNiveles();
 
-// console.log("valores2",valores2);
 
 //declaro arrow functions para validar los datos del nuevo alumno
 
@@ -285,7 +274,6 @@ const chequearSexoArrow = (sexo) => isNaN(sexo) ? true : false;
 // const chequearNombreArrow = (nombre) => isNaN(nombre) ?  true : false;
 function crearAlumno(nombre,edad,email,idiomas){
     var estados =[];
-    console.log("valores en crear alumno",valoresNivelesJson);
     let alumnos=JSON.parse(localStorage.getItem("alumnos"));
     //a continuacion se capturan los datos de los inputs y se validan 
 
@@ -325,6 +313,20 @@ function crearAlumno(nombre,edad,email,idiomas){
     else if(estados.includes(false)===false){
         id=alumnos.length+1;
         const newAlumno = new Alumno (id, nombre, edad, email, idiomas, nivel, sexo);
+        if (newAlumno.sexo==="M" || newAlumno.sexo==="m"){
+            newAlumno.img="https://res.cloudinary.com/dgvlsnajj/image/upload/v1663447133/Avatar_Hombre_xlw4dj.jpg";
+        }
+        //si el Alumno es Femenino, le defino la imagen de un avatar Femenino por defecto
+        else if (newAlumno.sexo==="F" || newAlumno.sexo==="f")
+            {
+            newAlumno.img="https://res.cloudinary.com/dgvlsnajj/image/upload/v1663447137/Avatar_Mujer_y5euoy.png";
+            }
+            //si no es definido o NA, le defino una imagen de un avatar por defecto.
+        else{
+            newAlumno.img="https://res.cloudinary.com/dgvlsnajj/image/upload/v1666493178/standardAvatar_hujpdk.jpg";
+        }
+        //convierto valor a mayuscula para mantener la sintaxis a la hora de renderizar.
+        newAlumno.nivel=newAlumno.nivel.toUpperCase()
         alumnos.push(newAlumno);
         localStorage.setItem("alumnos", JSON.stringify(alumnos));
         Swal.fire(

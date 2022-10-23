@@ -44,9 +44,19 @@ Click derecho y abrir con su navegador preferido al archivo "Index.html"
 
 *Servicio* --> los servicios dentro del sitio estan guardados dentro de un JSON ya que son datos que son estaticos por el momento solo se ofrece los servicios guardados en la carpeta data. También se guarda en un JSON para demostrar el uso de fetch en un JSON.
 
-*Curso* --> los Cursos son un Objeto en el que se debe ingresar si o si para la creacion del mismo sus atributos: (nomnbre,nivel,idioma,profesor,precio)
+*Curso* --> los Cursos son un Objeto en el que se debe ingresar si o si para la creacion del mismo sus atributos: (nomnbre,nivel,idioma,profesor,precio) con los niveles asociados en el JSON
 
-*Alumno* --> los Alumnos son un Objeto en el que se debe ingresar si o si para la creacion del mismo sus atributos: (nomnbre,edad,email,idiomas,nivel,sexo)
+*Alumno* --> los Alumnos son un Objeto en el que se debe ingresar si o si para la creacion del mismo sus atributos: (nomnbre,edad,email,idiomas,nivel,sexo) respetando sus tipos de datos, solo aceptamos alumnos mayores a 5 años y los niveles asociados en el JSON
+
+*Cotizar.HTML*--> se completaría una vez obtenido el back o aprendido React para poder utilizar un envio de correo y mandar la cotizacion al equipo correspondiente.
+
+##Usos:
+
+--->Se podrán crear cursos, alumnos y filtrar los mismos por distintas condiciones.
+--->Se podrá dejar el contacto a traves de la seccion: contactos.html
+--->podra observar los distintos servicios ofrecidos por el sitio.
+---> podra dejar su contacto para futuras cotizaciones ( aun no funciona la seccion de envio de  correo ya que necesito back o react para el uso de la misma)
+
 
 #Contactos
 
@@ -67,8 +77,8 @@ facumarianelli@gmail.com
 Para la implementacon del proyecto se uso:
 
 1. Sweet Alert para el envio de alertas.
-2. Javascript, HTML, CSS , Cloudinary para bajar las imagenes
-3. 
+2. Javascript, HTML, CSS , 
+3. Cloudinary para bajar las imagenes
 
 ###team
 

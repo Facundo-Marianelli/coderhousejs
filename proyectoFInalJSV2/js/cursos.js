@@ -9,9 +9,6 @@ class Curso {
         this.profesor=profesor;
         this.precio=precio;
     }
-    // presentacion() {
-    //     console.log("hola soy "+ this.name +" tengo "+this.age+ " y me gustaria aprender: "+ this.languages)
-    //   }
 }
 
 //inicializo variables:
@@ -36,7 +33,6 @@ datosDeCursos!=null ? console.log("los datos ya estan cargados.") : localStorage
 //inicializo variables
 const items = document.querySelector("#items");
 const muestroCursos=document.querySelector("#mostrandoCursos")
-console.log(cursos);
 
 const accionCurso=document.querySelector("#creacionCurso");
 accionCurso.addEventListener("click", crearCurso);
@@ -46,8 +42,6 @@ accionCurso.addEventListener("click", crearCurso);
 function renderizarCursos() {
     let cursos=JSON.parse(localStorage.getItem("cursos"));
     items.innerHTML="";
-    console.log(cursos.length)
-    console.log(cursos)
     cursos.forEach((curso) => {
       let htmlFiltrados = `
           <div class="col-12 mb-5 d-flex flex-row justify-content-center">
@@ -101,7 +95,7 @@ function crearCurso(nombre,nivel,idioma,profesor,precio) {
     var valores=document.querySelector("#valoresNuevoCurso");
     const inputElements = valores.querySelectorAll("input");
     let cursos=JSON.parse(localStorage.getItem("cursos"));
-    console.log(inputElements);
+
 
     //valido datos:
     nombre=inputElements[0].value;
